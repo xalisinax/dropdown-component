@@ -1,10 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
+import { useMemo, useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+import { Dropdown, Option } from "../lib";
+import { FaBeer } from "react-icons/fa";
 function App() {
-  const [count, setCount] = useState(0)
+  const options = useMemo(
+    () => [
+      { value: "1", label: "Option 1", icon: <FaBeer /> },
+      { value: "2", label: "Option 2" },
+      { value: "3", label: "Option 3" },
+      { value: "4", label: "Option 4" },
+      { value: "5", label: "Option 5" },
+    ],
+    []
+  );
+
+  const [values, setValue] = useState<Option[]>([]);
+
+  const changeHandler = (newValues: Option[]) => setValue(newValues);
 
   return (
     <>
@@ -18,18 +32,11 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        <Dropdown initialOptions={options} value={values} onChange={changeHandler} allowCreate placeholder="select..." />
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <p className="read-the-docs">Selected values are : {JSON.stringify(values)}</p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

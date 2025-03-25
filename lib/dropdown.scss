@@ -1,0 +1,137 @@
+$border-color: #ccc;
+$hover-border-color: #888;
+$tag-bg-color: #e0e0e0;
+$placeholder-color: #999;
+$dropdown-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+}
+
+.multi-select-dropdown {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  font-family: Arial, sans-serif;
+  border-radius: 4px;
+  transition: box-shadow 0.2s ease;
+
+  &.dropdown-open {
+    border-radius: 4px;
+  }
+
+  .search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    .search-input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+      transition: border-color 0.2s ease;
+
+      &:focus {
+        outline: none;
+        border-color: #3474eb;
+      }
+    }
+
+    .dropdown-indicator {
+      position: absolute;
+      right: 12px;
+      pointer-events: none;
+      color: #666;
+    }
+  }
+
+  .selected-tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+
+    .tag {
+      display: flex;
+      align-items: center;
+      background-color: #e0e0e0;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 14px;
+      background-color: #3474eb;
+      color: white;
+
+      .tag-remove {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0 4px;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.7);
+        margin-left: 4px;
+
+        &:hover {
+          color: white;
+        }
+      }
+    }
+  }
+
+  .dropdown-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        padding: 10px 12px;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #f0f0f0;
+
+        &:hover {
+          background-color: #f5f5f5;
+        }
+
+        &.selected {
+          background-color: #f0f7ff;
+          color: #3474eb;
+        }
+
+        .checkmark {
+          color: #3474eb;
+          font-weight: bold;
+        }
+      }
+
+      .no-options {
+        color: #999;
+        font-style: italic;
+        padding: 10px 12px;
+
+        strong {
+          font-weight: bold;
+          color: #555;
+        }
+      }
+    }
+  }
+}
